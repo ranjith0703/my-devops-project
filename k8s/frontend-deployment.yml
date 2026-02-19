@@ -1,4 +1,4 @@
-apiVersion: apps/v1
+apiVersion: apps/v2
 kind: Deployment
 metadata:
   name: frontend-deployment
@@ -14,18 +14,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: ranjith367/my-docker-minikube-frontend:latest   # ✅ Correct image name
+        image: frontend-app:v2
+        imagePullPolicy: Never
         ports:
-        - containerPort: 8080                                  # ✅ Use 8080 (your frontend app port)
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: frontend-service
-spec:
-  selector:
-    app: frontend
-  ports:
-  - port: 8080
-    targetPort: 8080
-  type: NodePort
+        - containerPort: 80
