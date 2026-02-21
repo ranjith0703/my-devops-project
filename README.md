@@ -7,4 +7,5 @@
 
 ## Run with Docker
 docker-compose up --build
-Trigger CI on dev branch
+
+Final trigger check
