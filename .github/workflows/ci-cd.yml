@@ -6,36 +6,74 @@ on:
       - dev
 
 jobs:
-  build:
+  ci-validation:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Checkout Repository
-      - name: Checkout Code
-        uses: actions/checkout@v3
 
-      # 2️⃣ Setup Python
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.10'
+    # 1️⃣ Checkout repository
+    - name: Checkout Repository
+      uses: actions/checkout@v3
 
-      # 3️⃣ Install Backend Dependencies
-      - name: Install Backend Dependencies
-        run: |
-          cd backend
-          pip install -r requirements.txt
 
-      # 4️⃣ Basic Lint / Syntax Validation
-      - name: Validate Backend Code
-        run: |
-          cd backend/src
-          python -m py_compile app.py
+    # -------------------------
+    # BACKEND VALIDATION
+    # -------------------------
 
-      # 5️⃣ Build Backend Docker Image
-      - name: Build Backend Docker Image
-        run: docker build -t backend-app ./backend
+    # 2️⃣ Setup Python
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.10"
 
-      # 6️⃣ Build Frontend Docker Image
-      - name: Build Frontend Docker Image
-        run: docker build -t frontend-app ./frontend
+    # 3️⃣ Install Backend Dependencies
+    - name: Install Backend Dependencies
+      run: |
+        cd backend
+        pip install -r requirements.txt
+
+    # 4️⃣ Backend Syntax Check (Lint alternative)
+    - name: Validate Backend Code
+      run: |
+        cd backend/src
+        python -m py_compile app.py
+
+
+    # -------------------------
+    # BLOCKCHAIN VALIDATION
+    # -------------------------
+
+    # 5️⃣ Setup Node.js
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: "18"
+
+    # 6️⃣ Install Blockchain Dependencies
+    - name: Install Blockchain Dependencies
+      run: |
+        cd blockchain
+        npm install
+
+    # 7️⃣ Run Hardhat Tests
+    - name: Run Hardhat Unit Tests
+      run: |
+        cd blockchain
+        npx hardhat test
+
+
+    # -------------------------
+    # DOCKER BUILD VALIDATION
+    # -------------------------
+
+    # 8️⃣ Build Backend Docker Image
+    - name: Build Backend Docker Image
+      run: docker build -t backend-app ./backend
+
+    # 9️⃣ Build Blockchain Docker Image
+    - name: Build Blockchain Docker Image
+      run: docker build -t blockchain-app ./blockchain
+
+    # 🔟 Build Frontend Docker Image
+    - name: Build Frontend Docker Image
+      run: docker build -t frontend-app ./frontend
