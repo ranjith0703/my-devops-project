@@ -1,5 +1,9 @@
 name: DevOps CI Pipeline
 
+permissions:
+  contents: read
+  packages: write
+
 on:
   pull_request:
     branches:
