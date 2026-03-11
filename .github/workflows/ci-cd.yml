@@ -101,3 +101,14 @@ jobs:
     - name: Push Blockchain Image
       run: |
         docker push ghcr.io/${{ github.repository_owner }}/blockchain-app:${{ env.COMMIT_HASH }}
+
+        # 1️⃣4️⃣ Build Frontend Docker Image
+    - name: Build Frontend Docker Image
+      run: |
+        docker build -t ghcr.io/${{ github.repository_owner }}/frontend-app:${{ env.COMMIT_HASH }} ./frontend
+
+    # 1️⃣5️⃣ Push Frontend Image
+    - name: Push Frontend Image
+      run: |
+        docker push ghcr.io/${{ github.repository_owner }}/frontend-app:${{ env.COMMIT_HASH }}
+        
