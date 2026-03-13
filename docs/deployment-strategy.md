@@ -63,3 +63,26 @@ In this environment:
 Local Development → CI Pipeline → Docker Image Build → Container Registry → Staging Deployment
 
 This workflow ensures that only validated builds are deployed to the staging environment.
+
+---
+
+# 2. Service Dependency Matrix
+
+The following table describes the relationship between services in the system.
+
+| Service | Depends On | Description |
+|--------|-------------|-------------|
+| Frontend | Backend | The frontend sends API requests to the backend service. |
+| Backend | Blockchain | The backend interacts with smart contracts deployed on the blockchain. |
+| Blockchain | None | The blockchain node runs independently and provides smart contract functionality. |
+
+---
+
+## Service Interaction Flow
+
+User → Frontend → Backend → Blockchain
+
+1. Users interact with the **Frontend** interface.
+2. The **Frontend** sends requests to the **Backend API**.
+3. The **Backend** processes logic and interacts with **Blockchain smart contracts**.
+4. The **Blockchain** executes contract functions and returns results.
