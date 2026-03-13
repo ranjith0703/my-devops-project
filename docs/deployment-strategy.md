@@ -86,3 +86,51 @@ User → Frontend → Backend → Blockchain
 2. The **Frontend** sends requests to the **Backend API**.
 3. The **Backend** processes logic and interacts with **Blockchain smart contracts**.
 4. The **Blockchain** executes contract functions and returns results.
+
+---
+
+# 3. Deployment Instructions (Staging Environment)
+
+The staging environment is deployed using Docker Compose and container images stored in the GitHub Container Registry.
+
+## Step 1 – Ensure Docker is installed
+
+Check Docker installation:
+  docker --version
+
+## Step 2 – Pull container images
+
+Pull the latest images from the container registry:
+ docker compose -f docker-compose.staging.yml pull
+ 
+## Step 3 – Start the staging environment
+
+Run the following command:
+ docker compose -f docker-compose.staging.yml up -d
+ 
+## Step 4 – Verify running containers
+
+Check running containers:
+docker ps
+
+
+Expected containers:
+
+- frontend-service  
+- backend-service  
+- blockchain-service  
+
+## Step 5 – Access the services
+
+Frontend  
+http://localhost:3000
+
+Backend  
+http://localhost:5000
+
+Blockchain  
+http://localhost:8545
+
+
+
+  
