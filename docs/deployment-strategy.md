@@ -123,7 +123,7 @@ Expected containers:
 ## Step 5 – Access the services
 
 Frontend  
-http://localhost:3000
+http://localhost:8080
 
 Backend  
 http://localhost:5000
