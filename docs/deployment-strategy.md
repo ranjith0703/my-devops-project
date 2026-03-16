@@ -96,21 +96,25 @@ The staging environment is deployed using Docker Compose and container images st
 ## Step 1 – Ensure Docker is installed
 
 Check Docker installation:
+
   docker --version
 
 ## Step 2 – Pull container images
 
 Pull the latest images from the container registry:
+
  docker compose -f docker-compose.staging.yml pull
  
 ## Step 3 – Start the staging environment
 
 Run the following command:
+
  docker compose -f docker-compose.staging.yml up -d
  
 ## Step 4 – Verify running containers
 
 Check running containers:
+
 docker ps
 
 
