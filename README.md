@@ -9,4 +9,5 @@
 docker-compose up --build
 
 Final pr check--success
-developer--kr
+developer--ranjith
+developer--vs
