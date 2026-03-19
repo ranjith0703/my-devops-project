@@ -4,14 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Frontend Legend ✨</title>
+
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       height: 100vh;
@@ -25,159 +22,151 @@
       position: relative;
     }
 
-    /* Particle Background */
     #particles {
       position: absolute;
-      top: 0;
-      left: 0;
       width: 100%;
       height: 100%;
       z-index: 0;
-      pointer-events: none;
     }
 
     .particle {
       position: absolute;
-      background: rgba(255, 255, 255, 0.2);
+      background: rgba(255,255,255,0.2);
       border-radius: 50%;
       animation: float 10s linear infinite;
     }
 
     @keyframes float {
-      0% {
-        transform: translateY(0) translateX(0);
-        opacity: 0.2;
-      }
-      50% {
-        opacity: 0.8;
-      }
-      100% {
-        transform: translateY(-120vh) translateX(50vw);
-        opacity: 0;
-      }
+      0% { transform: translateY(0); opacity: 0.2; }
+      100% { transform: translateY(-120vh); opacity: 0; }
     }
 
     .container {
       position: relative;
-      background: rgba(255, 255, 255, 0.1);
-      padding: 60px 80px;
+      background: rgba(255,255,255,0.1);
+      padding: 50px;
       border-radius: 25px;
-      box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
       backdrop-filter: blur(10px);
-      animation: fadeIn 1.5s ease-in-out;
-      z-index: 1;
+      box-shadow: 0 0 30px rgba(255,255,255,0.2);
       text-align: center;
+      z-index: 1;
+      width: 350px;
     }
 
     h1 {
-      font-size: 2.5rem;
-      font-weight: 700;
-      background: linear-gradient(90deg, #00c6ff, #0072ff);
-      background-size: 200% 200%;
-      
+      font-size: 2rem;
+      background: linear-gradient(90deg,#00c6ff,#0072ff);
+      -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      animation: gradientMove 3s ease infinite;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
     }
 
-    @keyframes gradientMove {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    p {
-      font-size: 1.2rem;
-      opacity: 0.8;
-      margin-bottom: 35px;
-      height: 28px;
-      overflow: hidden;
+    .typing {
+      border-right: 2px solid white;
       white-space: nowrap;
-      border-right: 3px solid white;
-      animation: typing 4s steps(40, end) infinite;
+      overflow: hidden;
+      width: 0;
+      animation: typing 4s steps(40,end) infinite;
     }
 
     @keyframes typing {
-      0%, 100% { width: 0; }
+      0%,100% { width: 0; }
       50% { width: 100%; }
     }
 
-    .btn {
-      position: relative;
-      overflow: hidden;
-      background: linear-gradient(90deg, #ff512f, #dd2476);
-      color: white;
-      border: none;
-      padding: 15px 50px;
-      border-radius: 50px;
-      font-size: 1.1rem;
-      font-weight: bold;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
-    }
-
-    .btn span {
-      position: relative;
-      z-index: 2;
-    }
-
-    .btn::after {
-      content: '';
-      position: absolute;
+    select, button {
+      margin-top: 15px;
+      padding: 12px;
       width: 100%;
-      height: 100%;
-      top: 0;
-      left: -100%;
-      background: rgba(255, 255, 255, 0.3);
-      transition: all 0.5s;
-      transform: skewX(-20deg);
+      border-radius: 10px;
+      border: none;
+      font-size: 1rem;
     }
 
-    .btn:hover::after {
-      left: 200%;
+    select {
+      background: rgba(255,255,255,0.2);
+      color: white;
     }
 
-    .btn:hover {
-      transform: scale(1.1);
-      background: linear-gradient(90deg, #dd2476, #ff512f);
-      box-shadow: 0 0 25px rgba(255, 105, 180, 0.7);
+    button {
+      background: linear-gradient(90deg,#ff512f,#dd2476);
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
     }
 
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(-20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    button:hover {
+      transform: scale(1.05);
+    }
+
+    #result {
+      margin-top: 20px;
+      font-size: 0.9rem;
+      color: #00ffcc;
     }
   </style>
 </head>
+
 <body>
-  <!-- Dynamic Particles -->
-  <div id="particles"></div>
 
-  <div class="container">
-    <h1>🚀 Hello from clxend project!</h1>
-    <p>Deployed with Docker 🐳 & Powered by Minikube ☁️</p>
-    <button class="btn" onclick="alert('successful 👍!')"><span>Click Me!</span></button>
-  </div>
+<div id="particles"></div>
 
-  <script>
-    // Generate floating particles dynamically
-    const particlesContainer = document.getElementById('particles');
-    for(let i = 0; i < 50; i++) {
-      const particle = document.createElement('div');
-      particle.classList.add('particle');
-      particle.style.left = Math.random() * 100 + 'vw';
-      const size = Math.random() * 8 + 2;
-      particle.style.width = particle.style.height = size + 'px';
-      particle.style.animationDuration = (Math.random() * 10 + 5) + 's';
-      particlesContainer.appendChild(particle);
+<div class="container">
+  <h1>🚀 DevOps + Blockchain</h1>
+  <p class="typing">Docker | CI/CD | Monitoring | Web3</p>
+
+  <!-- 🔥 NEW PAYMENT UI -->
+  <select id="payment">
+    <option value="">Select Payment Method</option>
+    <option value="UPI">UPI</option>
+    <option value="Card">Card</option>
+    <option value="Crypto">Crypto (Blockchain)</option>
+  </select>
+
+  <button onclick="processPayment()">Pay Now</button>
+
+  <div id="result"></div>
+</div>
+
+<script>
+  // particles
+  const particlesContainer = document.getElementById('particles');
+  for(let i=0;i<40;i++){
+    const p=document.createElement('div');
+    p.className='particle';
+    p.style.left=Math.random()*100+'vw';
+    let size=Math.random()*6+2;
+    p.style.width=p.style.height=size+'px';
+    p.style.animationDuration=(Math.random()*8+5)+'s';
+    particlesContainer.appendChild(p);
+  }
+
+  // payment logic
+  async function processPayment(){
+    const method=document.getElementById("payment").value;
+
+    if(!method){
+      alert("Select payment method");
+      return;
     }
-  </script>
+
+    let resultText="";
+
+    if(method==="Crypto"){
+      try{
+        const res=await fetch("http://localhost:5000/blockchain");
+        const data=await res.json();
+        resultText="✅ Blockchain Connected | Transaction counter: "+data.block_number;
+      }catch(err){
+        resultText="❌ Blockchain not reachable";
+      }
+    } else {
+      resultText="✅ "+method+" Payment Successful";
+    }
+
+    document.getElementById("result").innerText=resultText;
+  }
+</script>
+
 </body>
 </html>
