@@ -162,4 +162,4 @@ Docker environment successfully standardized for
 backend and frontend services.
 
 Blockchain module maintained using Remix-based
-development workflow.
+development workflow
